@@ -1,4 +1,4 @@
 <!--pages/index/index.wxml-->
 <view class='container'>
-  <map id="ofo-map" longitude='{{longitude}}' latitude='{{latitude}}' scale='16'/>
+  <map id="ofo-map" longitude='{{longitude}}' latitude='{{latitude}}' scale='16' show-location controls='{{controls}}' bindcontroltap='bindcontroltap'/>
 </view>

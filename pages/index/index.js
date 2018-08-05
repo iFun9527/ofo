@@ -8,7 +8,40 @@ Page({
     longitude:'113.62',
     latitude:'24.84',
   },
-
+  bindcontroltap:function(e){
+    switch(e.controlId){
+      case 1 :
+        this.movetoCenter();
+        break;
+      case 2 :
+        wx.scanCode({
+          success: () => {
+            wx.showLoading({
+              title: '正在获取密码',
+            })
+            wx.request({
+              url: 'https://www.easy-mock.com/mock/5b66b4861fc80e53a3ad625c/password',
+              success:(res) => {
+                console.log(res);
+                wx.hideLoading();
+                wx.redirectTo({
+                  url: '../scanResult/index?password='+res.data.data.password+'&number='+res.data.data.number,
+                  success: () => {
+                    wx.showToast({
+                      title: '获取密码成功',
+                      duration: 1000
+                    })
+                  }
+                })
+              }
+            })
+          },
+          fail: () => {
+            console.log(1212)
+          }
+        })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -16,10 +49,65 @@ Page({
     console.log("onLoad");
     wx.getLocation({
       success: res => {
-        console.log(this);
         this.setData({
           longitude:res.longitude,
           latitude:res.latitude
+        })
+      },
+    })
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          controls:[{
+            id:1,
+            iconPath:"/images/location.png",
+            position:{
+              width:50,
+              height:50,
+              left:20,
+              top:res.windowHeight - 80
+            },
+            clickable:true
+          },{
+            id:2,
+            iconPath:"/images/use.png",
+            position:{
+              width:90,
+              height:90,
+              left:res.windowWidth/2 - 45,
+              top:res.windowHeight - 125
+            },
+            clickable:true
+          },{
+            id:3,
+            iconPath:"/images/warn.png",
+            position:{
+              width:50,
+              height:50,
+              left:res.windowWidth - 70,
+              top:res.windowHeight - 80
+            },
+            clickable:true
+          },{
+            id:4,
+            iconPath:"/images/avatar.png",
+            position:{
+              width:50,
+              height:50,
+              left:res.windowWidth - 70,
+              top:res.windowHeight - 155
+            },
+            clickable:true
+          },{
+            id:5,
+            iconPath:"/images/marker.png",
+            position:{
+              width:30,
+              height:45,
+              left:res.windowWidth/2 - 15,
+              top:res.windowHeight/2 - 45
+            }
+          }]
         })
       },
     })
@@ -35,9 +123,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    console.log("onShow")
+  movetoCenter: function () {
+    this.mapctx.moveToLocation();
   },
+  onShow: function () {
+    this.mapctx = wx.createMapContext("ofo-map");
+    this.movetoCenter();
+  },
+
 
   /**
    * 生命周期函数--监听页面隐藏
