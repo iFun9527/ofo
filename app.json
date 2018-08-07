@@ -1,7 +1,10 @@
 {
   "pages":[
-    "pages/warn/index",
     "pages/index/index",
+    "pages/charge/index",
+    "pages/wallet/index",
+    "pages/my/index",
+    "pages/warn/index",
     "pages/billing/index",
     "pages/scanResult/index" 
   ],

@@ -51,6 +51,11 @@ Page({
         wx.navigateTo({
           url: '../warn/index',
         })
+        break;
+      case 4:
+      wx.navigateTo({
+        url: '../my/index',
+      })  
     }
   },
   /**
@@ -118,7 +123,7 @@ Page({
               height:45,
               left:res.windowWidth/2 - 15,
               top:res.windowHeight/2 - 45
-            }
+            },
           }]
         })
       },

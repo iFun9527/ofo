@@ -19,7 +19,7 @@
             data-index='{{index}}'/>
           </image>
         </block> 
-        <text class='add' bindtap='clickPhoto'>{{actionText}}</text> 
+        <text class='add'  bindtap='clickPhoto'>{{actionText}}</text> 
     </view>
     <view class='action-input'>
       <input name='number' placeholder='车牌号' bindinput='changeNumber'/>

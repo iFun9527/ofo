@@ -1,4 +1,5 @@
 // pages/warn/index.js
+var data = require('../../data/data.js');
 Page({
 
   /**
@@ -91,7 +92,7 @@ Page({
       })
     }
   },
-  changeNumber:function(){
+  changeNumber:function(e){
     this.setData({
       inputValue:{
         num:e.detail.value,
@@ -99,11 +100,11 @@ Page({
       }
     })
   },
-  changeDesc: function () {
+  changeDesc: function (e) {
     this.setData({
       inputValue: {
-        num: e.detail.inputValue.num,
-        desc: this.detail.value
+        num: this.data.inputValue.num,
+        desc: e.detail.value
       }
     })
   },
@@ -128,8 +129,8 @@ Page({
           if(res.confirm){
 
           }else{
-            wx.navigateBack({
-              delta:1
+            wx.redirectTo({
+              url: '../index/index',
             })
           }
         }
