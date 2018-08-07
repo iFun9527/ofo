@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/warn/index",
     "pages/index/index",
-    "pages/scanResult/index",
-    "pages/billing/index"
+    "pages/billing/index",
+    "pages/scanResult/index" 
   ],
   "window": {
     "navigationBarBackgroundColor": "#b9dd08",

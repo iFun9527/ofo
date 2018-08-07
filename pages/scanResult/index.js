@@ -23,7 +23,7 @@ Page({
       if(time <= 0){
         clearInterval(this.timer);
         wx.redirectTo({
-          url: '../billing/index',
+          url: '../billing/index?number='+options.number,
         })
       }
     },1000)

@@ -14,31 +14,42 @@ Page({
         this.movetoCenter();
         break;
       case 2 :
-        wx.scanCode({
-          success: () => {
-            wx.showLoading({
-              title: '正在获取密码',
-            })
-            wx.request({
-              url: 'https://www.easy-mock.com/mock/5b66b4861fc80e53a3ad625c/password',
-              success:(res) => {
-                console.log(res);
-                wx.hideLoading();
-                wx.redirectTo({
-                  url: '../scanResult/index?password='+res.data.data.password+'&number='+res.data.data.number,
-                  success: () => {
-                    wx.showToast({
-                      title: '获取密码成功',
-                      duration: 1000
-                    })
-                  }
-                })
-              }
-            })
-          },
-          fail: () => {
-            console.log(1212)
-          }
+        if(this.timer){
+          wx.navigateBack({
+            delta:1
+          })
+        }else{
+          wx.scanCode({
+            success: () => {
+              wx.showLoading({
+                title: '正在获取密码',
+              })
+              wx.request({
+                url: 'https://www.easy-mock.com/mock/5b66b4861fc80e53a3ad625c/password',
+                success: (res) => {
+                  console.log(res);
+                  wx.hideLoading();
+                  wx.redirectTo({
+                    url: '../scanResult/index?password=' + res.data.data.password + '&number=' + res.data.data.number,
+                    success: () => {
+                      wx.showToast({
+                        title: '获取密码成功',
+                        duration: 1000
+                      })
+                    }
+                  })
+                }
+              })
+            },
+            fail: () => {
+              console.log(1212)
+            }
+          })
+        }
+       break;
+      case 3:
+        wx.navigateTo({
+          url: '../warn/index',
         })
     }
   },
@@ -46,6 +57,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.timer = options.timer;
     console.log("onLoad");
     wx.getLocation({
       success: res => {
